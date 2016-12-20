@@ -5,11 +5,10 @@ from .models import College
 
 def index(request):
     top_college_list = College.objects.order_by('-SAT75pScore')[:5]
-    template = loader.get_template('scores/index.html')
     context = {
         'top_college_list': top_college_list,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'polls/index.html', context)
 
 def allColleges(request):
     return HttpResponse("This page will list all colleges.")
