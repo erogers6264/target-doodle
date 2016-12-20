@@ -16,8 +16,8 @@ class College(models.Model):
     @property
     def serialize(self):
         return {
-            'college_name': self.college_name
-            'region': self.region
-            'SAT25pScore': self.SAT25pScore
+            'college_name': self.college_name,
+            'region': self.region,
+            'SAT25pScore': self.SAT25pScore,
             'SAT75pScore': self.SAT75pScore
         }
