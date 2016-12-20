@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render
 
 from .models import College
 
@@ -8,7 +8,7 @@ def index(request):
     context = {
         'top_college_list': top_college_list,
     }
-    return render(request, 'polls/index.html', context)
+    return render(request, 'scores/index.html', context)
 
 def allColleges(request):
     return HttpResponse("This page will list all colleges.")
