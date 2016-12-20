@@ -1,7 +1,7 @@
 {% if top_college_list %}
     <ul>
     {% for college in top_college_list %}
-        <li><a href="/scores/{{ college.id }}/">{{college.college_name}}</a></li>
+        <li><a href="{% url 'scores:detail' college.id %}">{{college.college_name}}</a></li>
     {% endfor %}
     </ul>
 {% else %}
