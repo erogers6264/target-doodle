@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 
 from .models import College
@@ -10,8 +10,13 @@ def index(request):
     }
     return render(request, 'scores/index.html', context)
 
-def allColleges(request):
-    return HttpResponse("This page will list all colleges.")
-
 def collegeDetail(request, college_id):
-    return HttpResponse("This page the detail of college %s." % college_id)
+    try:
+        college = College.objects.get(pk=college_id)
+    except College.DoesNotExist:
+        raise Http404("College does not exist")
+    return render(request, 'scores/detail.html', {'college': college})
+
+def allColleges(request):
+    colleges = College.objects.all()
+    return render(request, 'scores/allColleges.html', {'colleges': colleges})
