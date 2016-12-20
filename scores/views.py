@@ -1,5 +1,5 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import College
 
@@ -11,10 +11,7 @@ def index(request):
     return render(request, 'scores/index.html', context)
 
 def collegeDetail(request, college_id):
-    try:
-        college = College.objects.get(pk=college_id)
-    except College.DoesNotExist:
-        raise Http404("College does not exist")
+    college = get_object_or_404(College, pk=college_id)
     return render(request, 'scores/detail.html', {'college': college})
 
 def allColleges(request):
