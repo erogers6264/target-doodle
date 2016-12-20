@@ -1,8 +1,11 @@
 from django.http import HttpResponse
 
+from .models import College
 
 def index(request):
-  return HttpResponse("Hello, world. You're at the scores index.")
+    top_college_list = College.objects.order_by('-SAT75pScore')[:5]
+    output = ', '.join([c.college_name + ': ' +str(c.SAT75pScore) for c in top_college_list])
+    return HttpResponse(output)
 
 def allColleges(request):
     return HttpResponse("This page will list all colleges.")
